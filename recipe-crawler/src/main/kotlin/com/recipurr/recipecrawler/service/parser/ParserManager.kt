@@ -15,7 +15,7 @@ class ParserManager() {
     val parsers = listOf<HtmlParser>()
 
     fun parseLoadedContent(loadedContent: LoadedContent): ParserOutput =
-        parsers.firstOrNull { it.parserType == loadedContent.sourceType }?.parseContent(loadedContent) ?: {
+        parsers.find { it.parserType == loadedContent.sourceType }?.parseContent(loadedContent) ?: {
             print("No parser found for type ${loadedContent.sourceType}")
             ParserOutput(null, emptyList())
         }()
