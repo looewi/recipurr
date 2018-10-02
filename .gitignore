@@ -1,2 +1,12 @@
 # Created by .ignore support plugin (hsz.mobi)
-/.idea/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*/.idea
+
+### recipe crawler###
+/recipe-crawler/target/
+!/recipe-crawler/.mvn/wrapper/maven-wrapper.jar
