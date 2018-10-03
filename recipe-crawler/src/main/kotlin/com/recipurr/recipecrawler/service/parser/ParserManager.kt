@@ -1,7 +1,8 @@
 package com.recipurr.recipecrawler.service.parser
 
 import com.recipurr.recipecrawler.service.queue.external.RecipeQueueProducer
-import com.recipurr.recipecrawler.service.queue.internal.UrlQueueProducer
+import com.recipurr.recipecrawler.service.queue.internal.UrlQueueItem
+import com.recipurr.recipecrawler.service.queue.internal.UrlQueueSender
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -13,7 +14,7 @@ data class LoadedContent(val sourceUrl: String,
                          val html: String)
 
 @Service
-class ParserManager(@Autowired var urlQueueProducer: UrlQueueProducer,
+class ParserManager(@Autowired var urlQueueSender: UrlQueueSender,
                     @Autowired var recipeQueueProducer: RecipeQueueProducer) {
 
     val parsers = listOf<HtmlParser>()
@@ -29,7 +30,6 @@ class ParserManager(@Autowired var urlQueueProducer: UrlQueueProducer,
         recipe?.let {
             recipeQueueProducer.sendRecipeToCategorizerQueue(it)
         }
-        urlQueueProducer.addLinksToQueue(relatedLinks)
-
+        urlQueueSender.addLinksToQueue(relatedLinks.map { UrlQueueItem(it, loadedContent.sourceType) })
     }
 }

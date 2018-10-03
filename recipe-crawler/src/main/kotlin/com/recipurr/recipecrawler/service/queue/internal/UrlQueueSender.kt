@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class UrlQueueProducer {
+class UrlQueueSender {
 
-    fun addLinksToQueue(links: List<String>) {
+    fun addLinksToQueue(links: List<UrlQueueItem>) {
 
     }
 }
