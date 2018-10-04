@@ -14,8 +14,11 @@ data class LoadedContent(val sourceUrl: String,
                          val html: String)
 
 @Service
-class ParserManager(@Autowired var urlQueueSender: UrlQueueSender,
-                    @Autowired var recipeQueueProducer: RecipeQueueProducer) {
+class ParserManager {
+
+    @Autowired lateinit var urlQueueSender: UrlQueueSender
+
+    @Autowired lateinit var recipeQueueProducer: RecipeQueueProducer
 
     val parsers = listOf<HtmlParser>()
 
